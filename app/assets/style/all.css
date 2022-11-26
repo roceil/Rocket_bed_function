@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .btn {
+    @apply bg-black text-white p-2 rounded-lg ml-4 cursor-pointer
+  }
+  .btn-hover {
+    @apply hover:bg-white hover:ring-black hover:ring-1 hover:text-black hover:duration-300 hover:ease-in-out
+  }
+}
