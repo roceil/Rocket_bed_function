@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>首頁</title>
+    <link rel="stylesheet" href="./assets/style/all.css" />
+  </head>
+
+  <body class="my-8">
+    
+<!-- * 全部產品 -->
+<section class="ml-7 mt-7">
+  <h2 class="text-2xl font-bold mb-3">全部產品</h2>
+
+  <select class="rounded-lg" name="" id="">
+    <option value="全部">全部</option>
+    <option value="床架">床架</option>
+    <option value="窗簾">窗簾</option>
+    <option value="收納">收納</option>
+  </select>
+
+  <ul
+    id="allProduct"
+    class="flex flex-col gap-y-3 mt-4 min-w-[728px] min-h-[404px]"
+  >
+    <li class="text-xl font-bold">載入中...</li>
+
+    <!-- <li class="flex items-center">
+      <p class="min-w-[300px]">甲資料</p>
+      <input
+        class="btn btn-hover"
+        type="button"
+        value="加入購物車"
+      />
+    </li> -->
+  </ul>
+</section>
+
+<!-- * 購物車 -->
+<section class="ml-7 mt-7">
+  <div class=" flex items-center">
+    <h2 class="text-2xl font-bold">
+      購物車
+    </h2>
+    <input
+        class="btn btn-hover text-base"
+        type="button"
+        value="清空購物車"
+        data-id=""
+      />
+  </div>
+
+  <ul id="cartList" class="flex flex-col gap-y-3 mt-4">
+    <li class="text-xl font-bold">載入中...</li>
+  </ul>
+</section>
+
+<!-- * 送出訂單 -->
+<section class="ml-7 mt-7">
+  <h2 class="text-2xl font-bold mb-3">送出訂單</h2>
+
+  <form class="flex flex-col gap-y-3" action="">
+    <!-- 姓名 -->
+    <label for="name">
+      <span>姓名：</span>
+      <input
+        id="name"
+        class="rounded-lg"
+        type="text"
+        placeholder="請輸入姓名"
+      />
+    </label>
+    <!-- 電話 -->
+    <label for="name">
+      <span>電話：</span>
+      <input
+        id="name"
+        class="rounded-lg"
+        type="text"
+        placeholder="請輸入電話"
+      />
+    </label>
+    <!-- 信箱 -->
+    <label for="name">
+      <span>信箱：</span>
+      <input
+        id="name"
+        class="rounded-lg"
+        type="text"
+        placeholder="請輸入email"
+      />
+    </label>
+    <!-- 地址 -->
+    <label for="name">
+      <span>地址：</span>
+      <input
+        id="name"
+        class="rounded-lg"
+        type="text"
+        placeholder="請輸入地址"
+      />
+    </label>
+    <!-- 付款方式 -->
+    <label for="name">
+      <span>付款方式：</span>
+      <select class="rounded-lg" name="" id="">
+        <option value="none">請選擇付款方式</option>
+        <option value="信用卡">信用卡</option>
+        <option value="現金">現金</option>
+      </select>
+    </label>
+  </form>
+</section>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/vendors.js"></script>
+    <script src="./assets/js/all.js"></script>
+  </body>
+</html>
