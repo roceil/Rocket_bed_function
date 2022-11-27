@@ -9,7 +9,7 @@ current: index
 <section class="ml-7 mt-7">
   <h2 class="text-2xl font-bold mb-3">全部產品</h2>
 
-  <select class="rounded-lg" name="" id="">
+  <select class="rounded-lg" name="" id="allProductType">
     <option value="全部">全部</option>
     <option value="床架">床架</option>
     <option value="窗簾">窗簾</option>
@@ -40,6 +40,7 @@ current: index
       購物車
     </h2>
     <input
+    id="clearAllCart_btn"
         class="btn btn-hover text-base"
         type="button"
         value="清空購物車"
@@ -48,7 +49,7 @@ current: index
   </div>
 
   <ul id="cartList" class="flex flex-col gap-y-3 mt-4">
-    <li class="text-xl font-bold">載入中...</li>
+    <li class="text-xl font-bold">購物車沒有商品</li>
   </ul>
 </section>
 
