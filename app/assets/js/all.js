@@ -2,19 +2,19 @@
 const route = `rocket-frank`;
 // ! API-token
 const token = `xWFBP5xYVHNDhUnNY6F5oYdQSIB3`;
-// // ! 暫存產品列表data
-// let allProductData = [];
-// // ! 暫存購物車列表data
-// let cartListData = [];
 
-// DOM-全部產品列表的ul
+// DOM => 全部產品列表的ul
 const allProduct_ul = document.querySelector(`#allProduct`);
-// DOM-全部產品列表的選單按鈕
+// DOM => 全部產品列表的選單按鈕
 const allProductType_btn = document.querySelector("#allProductType");
-// DOM-購物車列表的ul
+// DOM => 購物車列表的ul
 const cartList_ul = document.querySelector(`#cartList`);
-// DOM-清空購物車的btn
+// DOM => 清空購物車的btn
 const clearAllCart_btn = document.querySelector(`#clearAllCart_btn`);
+// DOM => 刪除購物車商品的btn
+const deleteProduct_btn = document.querySelector(`#deleteProductBtn`);
+// DOM => 送出訂單的form
+const orderSubmit_form = document.querySelector(`#orderSubmit`);
 
 allProductRender();
 cartListRender();
@@ -32,7 +32,7 @@ function allProductRender() {
         allProductStr += `<li class="flex items-center">
         <p class="min-w-[300px]">${item["title"]}</p>
         <input
-        id=${item["id"]}
+        data-id=${item["id"]}
         class="btn btn-hover addToCartBtn"
         type="button"
         value="加入購物車"
@@ -53,12 +53,16 @@ function cartListRender() {
       `https://livejs-api.hexschool.io/api/livejs/v1/customer/${route}/carts`
     )
     .then((res) => {
-      let cartListStr = ``;
-      res.data["carts"].map((item) => {
-        console.log(1);
-        cartListStr += `<li class="flex items-center"><p class="min-w-[300px]">${item["product"]["title"]}</p><input cart_id=${item["id"]} class="btn btn-hover" type="button" value="刪除商品" /></li>`;
+      if (res.data["carts"].length === 0) {
+        let cartListStr = `<li class="text-xl font-bold">購物車沒有商品</li>`;
         cartList_ul.innerHTML = cartListStr;
-      });
+      } else {
+        let cartListStr = ``;
+        res.data["carts"].map((item) => {
+          cartListStr += `<li class="flex items-center"><p class="min-w-[300px]">${item["product"]["title"]}</p><input id="deleteProductBtn" cart-id=${item["id"]} class="btn btn-hover" type="button" value="刪除商品" /></li>`;
+          cartList_ul.innerHTML = cartListStr;
+        });
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -74,13 +78,13 @@ function addToCart(e) {
 `,
       {
         data: {
-          productId: `${e.target.id}`,
+          productId: `${e.target.getAttribute("data-id")}`,
           quantity: 5,
         },
       }
     )
     .then((res) => {
-      console.log(e.target.id);
+      alert("此商品已加入購物車");
       cartListRender();
     })
     .catch((err) => {
@@ -96,11 +100,41 @@ function clearAllCart() {
   `
     )
     .then((res) => {
-      // cartListRender() => //? 按按鈕後不會重新渲染
-      window.location.reload(); // !因為不會重新渲染，所以重新整理
+      cartListRender();
+      alert("購物車已清空");
     })
     .catch((err) => {
       console.log(err);
+    });
+}
+
+//函式 => 送出訂單
+function orderSubmit(forms) {
+  axios
+    .post(
+      `https://livejs-api.hexschool.io/api/livejs/v1/customer/${route}/orders`,
+      {
+        data: {
+          user: {
+            name: forms[0].value,
+            tel: forms[1].value,
+            email: forms[2].value,
+            address: forms[3].value,
+            payment: forms[4].value,
+          },
+        },
+      }
+    )
+    .then((res) => {
+      for (let i = 0; i < 4; i++) {
+        forms[i].value = ``;
+        forms[4].value = `none`;
+      }
+      cartListRender();
+      alert("訂單建立成功");
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
     });
 }
 
@@ -137,7 +171,6 @@ allProductType_btn.addEventListener("change", (e) => {
 // 監聽 => 加入購物車按鈕
 allProduct_ul.addEventListener("click", (e) => {
   if (e.target.type === "button") {
-    console.log("點到了按鈕");
     addToCart(e);
   } else {
     return;
@@ -147,7 +180,38 @@ allProduct_ul.addEventListener("click", (e) => {
 clearAllCart_btn.addEventListener("click", (e) => {
   clearAllCart();
 });
-
-function productSelect() {
-  // * 撈取所有產品資料
-}
+// 監聽 => 刪除購物車商品按鈕
+cartList_ul.addEventListener("click", (e) => {
+  if (e.target.type === "button") {
+    axios
+      .delete(
+        `https://livejs-api.hexschool.io/api/livejs/v1/customer/${route}/carts/${e.target.getAttribute(
+          "cart-id"
+        )}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        cartListRender();
+        alert("此商品已刪除");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    return;
+  }
+});
+// 監聽 => 送出訂單的各項資料
+orderSubmit_form.addEventListener("click", (e) => {
+  e.preventDefault();
+  let forms = document.forms[0];
+  if (e.target.value === "送出訂單") {
+    for (let i = 0; i < forms.length; i++) {
+      if (forms[i].value === `` || forms[4].value === "none") {
+        alert("請填寫每筆資料");
+        return;
+      }
+    }
+    orderSubmit(forms);
+  }
+});
