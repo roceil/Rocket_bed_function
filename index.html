@@ -40,17 +40,15 @@
 
 <!-- * 購物車 -->
 <section class="ml-7 mt-7">
-  <div class=" flex items-center">
-    <h2 class="text-2xl font-bold">
-      購物車
-    </h2>
+  <div class="flex items-center">
+    <h2 class="text-2xl font-bold">購物車</h2>
     <input
-    id="clearAllCart_btn"
-        class="btn btn-hover text-base"
-        type="button"
-        value="清空購物車"
-        data-id=""
-      />
+      id="clearAllCart_btn"
+      class="btn btn-hover text-base"
+      type="button"
+      value="清空購物車"
+      data-id=""
+    />
   </div>
 
   <ul id="cartList" class="flex flex-col gap-y-3 mt-4">
@@ -60,9 +58,9 @@
 
 <!-- * 送出訂單 -->
 <section class="ml-7 mt-7">
-  <h2 class="text-2xl font-bold mb-3">送出訂單</h2>
+  <h2 class="text-2xl font-bold mb-3">↓訂單資訊↓</h2>
 
-  <form class="flex flex-col gap-y-3" action="">
+  <form id="orderSubmit" class="flex flex-col gap-y-3">
     <!-- 姓名 -->
     <label for="name">
       <span>姓名：</span>
@@ -71,50 +69,55 @@
         class="rounded-lg"
         type="text"
         placeholder="請輸入姓名"
+        value=""
       />
     </label>
     <!-- 電話 -->
-    <label for="name">
+    <label for="phone">
       <span>電話：</span>
       <input
-        id="name"
+        id="phone"
         class="rounded-lg"
         type="text"
         placeholder="請輸入電話"
+        value=""
       />
     </label>
     <!-- 信箱 -->
-    <label for="name">
+    <label for="email">
       <span>信箱：</span>
       <input
-        id="name"
+        id="email"
         class="rounded-lg"
         type="text"
         placeholder="請輸入email"
+        value=""
       />
     </label>
     <!-- 地址 -->
-    <label for="name">
+    <label for="addres">
       <span>地址：</span>
       <input
-        id="name"
+        id="addres"
         class="rounded-lg"
         type="text"
         placeholder="請輸入地址"
+        value=""
       />
     </label>
     <!-- 付款方式 -->
-    <label for="name">
+    <label for="payment">
       <span>付款方式：</span>
-      <select class="rounded-lg" name="" id="">
+      <select class="rounded-lg" name="" id="payment">
         <option value="none">請選擇付款方式</option>
         <option value="信用卡">信用卡</option>
         <option value="現金">現金</option>
       </select>
     </label>
+    <!-- 送出按鈕 -->
+    <input class="btn btn-hover w-[250px] m-0" type="submit" value="送出訂單">
   </form>
 </section>
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./assets/js/vendors.js"></script>
     <script src="./assets/js/all.js"></script>
