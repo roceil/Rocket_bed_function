@@ -125,7 +125,7 @@ allProductType_btn.addEventListener("change", function (e) {
   var allProductStr = "";
   newData["products"].map(function (item) {
     if (e.target.value === item["category"]) {
-      allProductStr += "<li class=\"flex items-center\">\n      <p class=\"min-w-[300px]\">".concat(item["title"], "</p>\n      <input\n      id=").concat(item["id"], "\n      class=\"btn btn-hover addToCartBtn\"\n      type=\"button\"\n      value=\"\u52A0\u5165\u8CFC\u7269\u8ECA\"\n    />");
+      allProductStr += "<li class=\"flex items-center\">\n      <p class=\"min-w-[300px]\">".concat(item["title"], "</p>\n      <input\n      data-id=").concat(item["id"], "\n      class=\"btn btn-hover addToCartBtn\"\n      type=\"button\"\n      value=\"\u52A0\u5165\u8CFC\u7269\u8ECA\"\n    />");
       allProduct_ul.innerHTML = allProductStr;
     } else if (e.target.value === "全部") {
       allProductRender();
