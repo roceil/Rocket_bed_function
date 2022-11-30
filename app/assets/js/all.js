@@ -170,7 +170,7 @@ allProductType_btn.addEventListener("change", (e) => {
       allProductStr += `<li class="flex items-center">
       <p class="min-w-[300px]">${item["title"]}</p>
       <input
-      id=${item["id"]}
+      data-id=${item["id"]}
       class="btn btn-hover addToCartBtn"
       type="button"
       value="加入購物車"
